@@ -26,11 +26,11 @@ services:
        container_name: factServer3
 
       loadbalancer:
-        build: ./server
+        build: ./balancer
         container_name: balancer
+      
 
-
-      redisserver:
+       redisserver:
         build: ./redis
         ports:
          - 8000:6379
