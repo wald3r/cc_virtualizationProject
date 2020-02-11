@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+      server1:
+       build: ./server 
+       ports:
+         - 3001:3001
+       environment:
+         - PORT=3001
+       container_name: factServer1
+
+      server2:
+       build: ./server
+       ports:
+         - 3002:3002
+       environment:
+         - PORT=3002
+       container_name: factServer2
+
+      server3:
+       build: ./server
+       ports:
+         - 3003:3003
+       environment:
+         - PORT=3003
+       container_name: factServer3
+
+      loadbalancer:
+        build: ./server
+        container_name: balancer
+
+
+      redisserver:
+        build: ./redis
+        ports:
+         - 8000:6379
+        container_name: database
