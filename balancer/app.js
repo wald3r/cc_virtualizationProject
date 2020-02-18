@@ -12,14 +12,23 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
+await getKeys()
 
-client.randomkey(async (err, key) => {
-  await client.get(key, async (err, value) => {
-    const rrValue = getRoundRobin()
-    console.log('send value:', value, 'to', serverNames[rrValue])
-    await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
-  })
-})
+
+const getKeys = async () => {
+
+  for(;;){
+    await sleep(500)
+    client.randomkey(async (err, key) => {
+      await client.get(key, async (err, value) => {
+        const rrValue = getRoundRobin()
+        console.log('send value:', value, 'to', serverNames[rrValue])
+        await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+      })
+    })
+  }
+}
+
 
 const getRoundRobin = () => {
 
@@ -31,6 +40,10 @@ const getRoundRobin = () => {
     roundRobin = 0
     return 0
   }
+}
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 const sendNumber = async (port, names, number) => {
