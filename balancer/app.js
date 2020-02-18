@@ -20,7 +20,7 @@ const getRoundRobin = () => {
     roundRobin = roundRobin + 1
     return tmp
   }else{
-    roundRobin = 0
+    roundRobin = 1
     return 0
   }
 }
@@ -36,7 +36,7 @@ const sendNumber = async (port, names, number) => {
 const distributeValues = async () => {
 
   for(;;){
-    await sleep(500)
+    await sleep(100)
     client.randomkey(async (err, key) => {
       await client.get(key, async (err, value) => {
         const rrValue = getRoundRobin()

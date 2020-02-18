@@ -20,7 +20,7 @@ router.post('/:id', async(request, response) => {
 
  body = request.params.id
  const result = factorial(body)
- console.log(result, body, config.PORT)
+ console.log('Factorial value:', result, 'Original value:', body)
 	
 })
 
