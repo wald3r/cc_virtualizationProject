@@ -12,10 +12,10 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
-await getKeys()
+distributeValues
 
 
-const getKeys = async () => {
+const distributeValues = async () => {
 
   for(;;){
     await sleep(500)
