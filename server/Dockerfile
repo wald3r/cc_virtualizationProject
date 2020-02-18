@@ -5,4 +5,4 @@ ADD . .
 
 RUN npm install
 
-npm start
+CMD npm start
