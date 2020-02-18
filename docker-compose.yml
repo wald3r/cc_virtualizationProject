@@ -46,6 +46,9 @@ services:
       loadbalancer:
        depends_on: 
          - redis
+         - server1
+         - server2
+         - server3
        build: ./balancer
        networks:
          - webnet       

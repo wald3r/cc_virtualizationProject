@@ -19,9 +19,9 @@ scanner.eachScan('*', async (matchingKeys) => {
       if (err) throw err
       else {
         const rrValue = getRoundRobin()
-	      console.log('send value:', value, 'to', serverNames[rrValue])
-        sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
-        await sleep(3000)
+	console.log('send value:', value, 'to', serverNames[rrValue])
+        await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+        //await sleep(3000)
       }
     })
   }
@@ -43,6 +43,6 @@ const getRoundRobin = () => {
   }
 }
 
-const sendNumber = (port, names, number) => {
-  axios.post(`http://${names}:${port}/api/fact/${number}`)
+const sendNumber = async (port, names, number) => {
+  await axios.post(`http://${names}:${port}/api/fact/${number}`)
 }
