@@ -5,4 +5,4 @@ ADD . .
 
 RUN npm install
 
-CMD sleep 10 && npm start
+CMD sleep 5 && npm start
