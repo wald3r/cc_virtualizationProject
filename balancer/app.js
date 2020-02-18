@@ -12,8 +12,8 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
-scanner.eachScan('*', async (matchingKeys) => {
-  try{
+scanner.scan('*', { count: 200 }, async (matchingKeys) => {
+
     await Promise.all(matchingKeys.map(async key => {
       await client.get(key, async (err, value) => {
         if (err) throw err
@@ -24,9 +24,7 @@ scanner.eachScan('*', async (matchingKeys) => {
         }
       })
     }))
-  }catch(error){
-    console.log('Promise problem')
-  } 
+
 })
 
 
