@@ -14,9 +14,15 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 
 scanner.eachScan('*', async (matchingKeys) => {
 
-  Promise.all(matchingKeys.map(key => client.getAsync(key))).then(values => {
-    console.log(values)
-  })
+    Promise.all(matchingKeys.map(key => client.get(key), async (err, value) => {
+	    if (err) throw err
+        else {
+            const rrValue = getRoundRobin()
+            console.log('send value:', value, 'to', serverNames[rrValue])
+            await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+        }
+
+  }))
   
 /*
   for(let a = 0; a < matchingKeys.length; a++){
