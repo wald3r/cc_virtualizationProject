@@ -19,7 +19,7 @@ scanner.eachScan('*', async (matchingKeys) => {
       if (err) throw err
       else {
         const rrValue = getRoundRobin()
-	console.log('send value:', value, 'to', serverNames[rrValue])
+	      console.log('send value:', value, 'to', serverNames[rrValue])
         sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
         await sleep(3000)
       }
@@ -38,7 +38,7 @@ const getRoundRobin = () => {
     roundRobin = roundRobin + 1
     return tmp
   }else{
-    roundRobing = 0
+    roundRobin = 0
     return 0
   }
 }
