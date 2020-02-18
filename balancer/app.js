@@ -12,6 +12,12 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
+
+client.randomkey((err, key) => {
+  console.log(key)
+})
+
+/*
 scanner.eachScan('*', { count: 200 }, async (matchingKeys) => {
 
     await Promise.all(matchingKeys.map(async key => {
@@ -26,7 +32,7 @@ scanner.eachScan('*', { count: 200 }, async (matchingKeys) => {
     }))
 
 })
-
+*/
 
 const getRoundRobin = () => {
 
