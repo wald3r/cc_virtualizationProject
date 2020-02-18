@@ -48,4 +48,4 @@ const sendNumber = async (port, names, number) => {
 }
 
 
-distributeValues
+distributeValues()
