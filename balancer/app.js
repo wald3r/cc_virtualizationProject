@@ -14,7 +14,7 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 
 scanner.eachScan('*', async (matchingKeys) => {
 
-  Promise.all(matchingKeys.map(key => {
+  await Promise.all(matchingKeys.map(async key => {
     await client.get(key, async (err, value) => {
       if (err) throw err
       else {
