@@ -13,17 +13,20 @@ client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
 scanner.eachScan('*', async (matchingKeys) => {
-
-  await Promise.all(matchingKeys.map(async key => {
-    await client.get(key, async (err, value) => {
-      if (err) throw err
-      else {
-        const rrValue = getRoundRobin()
-        console.log('send value:', value, 'to', serverNames[rrValue])
-        await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
-      }
-    })
-  })) 
+  try{
+    await Promise.all(matchingKeys.map(async key => {
+      await client.get(key, async (err, value) => {
+        if (err) throw err
+        else {
+          const rrValue = getRoundRobin()
+          console.log('send value:', value, 'to', serverNames[rrValue])
+          await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+        }
+      })
+    }))
+  }catch(error){
+    console.log('Promise problem')
+  } 
 })
 
 
