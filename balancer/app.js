@@ -13,7 +13,6 @@ client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
 
-
 const getRoundRobin = () => {
 
   if(roundRobin < 3){
@@ -34,14 +33,18 @@ const sendNumber = async (port, names, number) => {
   await axios.post(`http://${names}:${port}/api/fact/${number}`)
 }
 
+const distributeValues = async () => {
 
-for(;;){
-  await sleep(500)
-  client.randomkey(async (err, key) => {
-    await client.get(key, async (err, value) => {
-      const rrValue = getRoundRobin()
-      console.log('send value:', value, 'to', serverNames[rrValue])
-      await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+  for(;;){
+    await sleep(500)
+    client.randomkey(async (err, key) => {
+      await client.get(key, async (err, value) => {
+        const rrValue = getRoundRobin()
+        console.log('send value:', value, 'to', serverNames[rrValue])
+        await sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+      })
     })
-  })
+  }
 }
+
+distributeValues()
