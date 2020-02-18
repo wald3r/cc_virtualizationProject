@@ -2,6 +2,7 @@ const redis = require('redis');
 const redisScan = require('node-redis-scan')
 const axios = require('axios')
 const serverPorts = [3001, 3002, 3003]
+const serverNames = ['server1', 'server2', 'server3']
 
 const client = redis.createClient({port: 6379, host: 'redis'});
 const scanner = new redisScan(client) 
@@ -11,19 +12,25 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
-scanner.eachScan('*', (matchingKeys) => {
+scanner.eachScan('*', async (matchingKeys) => {
 
   for(let a = 0; a < matchingKeys.length; a++){
-     client.get(matchingKeys[a], (err, value) => {
+     await client.get(matchingKeys[a], async (err, value) => {
       if (err) throw err
       else {
 
         console.log('send value:', value)
-        sendNumber(serverPorts[getRoundRobin()], value)
+        const rrValue = getRoundRobin()
+        sendNumber(serverPorts[rrValule], serverNames[rrValue], value)
+        await sleep(1000)
       }
     })
   }
 })
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 const getRoundRobin = () => {
 
@@ -37,6 +44,6 @@ const getRoundRobin = () => {
   }
 }
 
-const sendNumber = (port, number) => {
-  axios.post(`http://127.0.0.1:${port}/api/fact/${number}`)
+const sendNumber = (port, names, number) => {
+  axios.post(`http://${names}:${port}/api/fact/${number}`)
 }

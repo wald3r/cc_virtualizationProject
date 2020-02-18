@@ -2,40 +2,49 @@ version: "3"
 
 services:
       server1:
-       depends_on: redisserver
+       depends_on: 
+         - redis
        build: ./server 
-       ports:
-         - 3001:3001
+       networks:
+         - webnet
        environment:
          - PORT=3001
        container_name: factServer1
 
       server2:
-       depends_on: redisserver
+       depends_on: 
+         - redis
        build: ./server
-       ports:
-         - 3002:3002
+       networks:
+         - webnet
        environment:
          - PORT=3002
        container_name: factServer2
 
       server3:
-       depends_on: redisserver
+       depends_on: 
+         - redis
        build: ./server
-       ports:
-         - 3003:3003
+       networks:
+         - webnet
        environment:
          - PORT=3003
        container_name: factServer3
 
       loadbalancer:
-       depends_on: redisserver
+       depends_on: 
+         - redis
        build: ./balancer
+       networks:
+         - webnet       
        container_name: balancer
       
 
-      redisserver:
+      redis:
        build: ./redis
-       ports: 
-         - 6379:6379
-       container_name: database
+       networks:
+         - webnet
+       container_name: redis
+
+networks:
+  webnet:
