@@ -18,11 +18,10 @@ scanner.eachScan('*', async (matchingKeys) => {
      await client.get(matchingKeys[a], async (err, value) => {
       if (err) throw err
       else {
-
-        console.log('send value:', value)
         const rrValue = getRoundRobin()
-        sendNumber(serverPorts[rrValule], serverNames[rrValue], value)
-        await sleep(1000)
+	console.log('send value:', value, 'to', serverNames[rrValue])
+        sendNumber(serverPorts[rrValue], serverNames[rrValue], value)
+        await sleep(3000)
       }
     })
   }
@@ -34,9 +33,9 @@ const sleep = (milliseconds) => {
 
 const getRoundRobin = () => {
 
-  if(roundRobin < serverPorts.length){
+  if(roundRobin < 3){
     var tmp = roundRobin
-    roundRobin ++
+    roundRobin = roundRobin + 1
     return tmp
   }else{
     roundRobing = 0
