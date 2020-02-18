@@ -3,7 +3,7 @@ const redisScan = require('node-redis-scan')
 const axios = require('axios')
 const serverPorts = [3001, 3002, 3003]
 
-const client = redis.createClient({port: 8000, host: '127.0.0.1'});
+const client = redis.createClient({port: 6379, host: 'redis'});
 const scanner = new redisScan(client) 
 
 var roundRobin = 0
