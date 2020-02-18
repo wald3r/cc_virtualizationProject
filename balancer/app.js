@@ -16,7 +16,7 @@ scanner.eachScan('*', async (matchingKeys) => {
 
   Promise.all(matchingKeys.map(key => client.getAsync(key))).then(values => {
     console.log(values)
-  } 
+  })
   
 /*
   for(let a = 0; a < matchingKeys.length; a++){
