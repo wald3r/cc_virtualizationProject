@@ -12,9 +12,6 @@ var roundRobin = 0
 client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
-distributeValues
-
-
 const distributeValues = async () => {
 
   for(;;){
@@ -49,3 +46,6 @@ const sleep = (milliseconds) => {
 const sendNumber = async (port, names, number) => {
   await axios.post(`http://${names}:${port}/api/fact/${number}`)
 }
+
+
+distributeValues
