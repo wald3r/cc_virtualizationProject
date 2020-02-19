@@ -21,7 +21,7 @@ router.post('/:key', async(request, response) => {
 
   var key = request.params.key
   if(request.params.key === '1'){
-    await distributeKey('xcwb')
+    await distributeKey('xwbc')
   }else{
     await distributeKey(key)
   }
@@ -32,24 +32,25 @@ router.post('/:key', async(request, response) => {
 
 const distributeKey = async (key) => {
   for(;;){
-    const rrValue = getRoundRobin()
-    console.log(serverPorts[rrValue])
-    console.log(key)
-    const status = await sendKey(serverPorts[rrValue], '127.0.0.1', key)
-    if(status === 200){
-      console.log('Forwarded request', key, 'to', serverNames[rrValue])
-      break
-    }else{
-      console.log(status)
+    try{
+      const rrValue = getRoundRobin()
+      console.log(serverPorts[rrValue])
+      console.log(key)
+      const response = await sendKey(serverPorts[rrValue], '127.0.0.1', key)
+      if(response.code === 200){
+        console.log('Forwarded request', key, 'to', serverNames[rrValue])
+        break
+      }
+    }catch(exception){
+      console.log(exception)
     }
-    break
   }
 }
  
 
 const sendKey = async (port, names, key) => {
   const response = await axios.post(`http://${names}:${port}/fact/${key}`)
-  return response.status
+  return response
 }
 
 

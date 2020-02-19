@@ -34,7 +34,7 @@ router.post('/:id', async(request, response) => {
  const key = request.params.id
  const result = await getValue(key)
  console.log('Factorial value:', result, '/ Original key:', key)
- response.status(200)
+ await response.status(200)
 	
 })
 
