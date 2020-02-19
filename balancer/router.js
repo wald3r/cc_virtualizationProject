@@ -20,15 +20,19 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 router.post('/:key', async(request, response) => {
 
   var key = request.params.key
-  console.log(request.params.key)
   if(request.params.key === '1'){
-    console.log('test')
     await client.randomkey(async (err, value) => {
-      console.log('tests',key)
-      key = value
+      await distributeKey(value)
     })
+  }else{
+    await distributeKey(key)
   }
-  console.log(key)
+
+  
+})
+
+
+const distributeKey = async (key) => {
   for(;;){
     const rrValue = getRoundRobin()
     console.log(serverPorts[rrValue])
@@ -40,7 +44,7 @@ router.post('/:key', async(request, response) => {
     }
     break
   }
-})
+}
  
 
 const sendKey = async (port, names, key) => {
