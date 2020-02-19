@@ -25,6 +25,7 @@ router.get('/', async(request, response) => {
   client.randomkey((err, key) => {
     client.get(key, (err, value) => {
       const fac = factorial(value)
+      console.log(`The factorial of ${value} is ${fac}`)
       return response.status(200).send(`The factorial of ${value} is ${fac}`)
     })
   })

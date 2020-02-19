@@ -11,7 +11,8 @@ var roundRobin = 0
 
 router.get('/', async(request, response) => {
 
-    const response = await getValue()
+    const answer = await getValue()
+    response.status(200).send(answer.data)
 })
 
 
@@ -30,8 +31,8 @@ const getValue = async () => {
 
  
 
-const sendMessage = async (port, names, key) => {
-  const response = await axios.get(`http://${names}:${port}/fact/${key}`)
+const sendMessage = async (port, names) => {
+  const response = await axios.get(`http://${names}:${port}/fact/`)
   return response
 }
 
