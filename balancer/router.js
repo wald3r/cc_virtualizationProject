@@ -9,9 +9,24 @@ var serverNames = helper.createServernames
 
 var roundRobin = 0
 
+
+const redis = require('redis');
+const client = redis.createClient({port: 6379, host: 'redis'});
+client.on('connect', () => console.log('connected'))
+client.on('error', (err) => console.log('Something went wrong ' + err))
+
+
+
+
 router.post('/:id', async(request, response) => {
 
-  const key = request.params.id
+  var key = request.params.id
+  if(key === 1){
+    client.randomkey((err, value) => {
+      key = value
+    })
+  }
+
   for(;;){
     const rrValue = getRoundRobin()
     const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
