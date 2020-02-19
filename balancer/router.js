@@ -42,7 +42,7 @@ const distributeKey = async (key) => {
         break
       }
     }catch(exception){
-      console.log(exception)
+      console.log('Error')
     }
   }
 }

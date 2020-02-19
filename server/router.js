@@ -12,8 +12,7 @@ const getValue = async (key) => {
 
   await client.get(key, async (err, value) => {
      const fac = factorial(value)
-     console.log(fac)
-     return fac
+     console.log('Factorial value:', fac, '/ Original key:', key)
   })
 
 }
@@ -35,7 +34,6 @@ router.post('/:id', async(request, response) => {
  console.log('test')
  const key = request.params.id
  const result = await getValue(key)
- console.log('Factorial value:', result, '/ Original key:', key)
  await response.status(200)
 	
 })
