@@ -1,7 +1,20 @@
 
-const config = require('./config')
 const router = require('express').Router()
+const redis = require('redis');
 
+
+const client = redis.createClient({port: 6379, host: 'redis'});
+client.on('connect', () => console.log('connected'))
+client.on('error', (err) => console.log('Something went wrong ' + err))
+
+
+const getValue = (key) => {
+
+  client.get(key, async (err, value) => {
+    return value
+  })
+
+}
 
 
 const factorial = (n) => {
@@ -18,9 +31,10 @@ const factorial = (n) => {
 
 router.post('/:id', async(request, response) => {
 
- body = request.params.id
- const result = factorial(body)
- console.log('Factorial value:', result, 'Original value:', body)
+ const key = request.params.id
+ const value = getValue(key)
+ const result = factorial(value)
+ console.log('Factorial value:', result, '/ Original value:', value)
 	
 })
 

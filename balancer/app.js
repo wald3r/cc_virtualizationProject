@@ -1,5 +1,25 @@
-const redis = require('redis');
-const redisScan = require('node-redis-scan')
+
+const express = require('express')
+const app = express()
+const router = require('./router')
+const bodyParser = require('body-parser')
+
+
+
+app.use(bodyParser.json())
+app.use('/', router)
+
+
+module.exports = app
+
+
+
+
+
+
+/*
+
+
 const axios = require('axios')
 const serverPorts = [3001, 3002, 3003]
 const serverNames = ['server1', 'server2', 'server3']
@@ -47,4 +67,4 @@ const distributeValues = async () => {
   }
 }
 
-distributeValues()
+distributeValues()*/

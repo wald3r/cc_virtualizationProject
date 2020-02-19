@@ -4,7 +4,7 @@ const router = require('./router')
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
-app.use('/api/fact', router)
+app.use('/fact', router)
 
 
 module.exports = app
