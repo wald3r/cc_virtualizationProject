@@ -21,7 +21,8 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 router.post('/:key', async(request, response) => {
 
   var key = request.params.key
-  if(key === 1){
+  console.log(request.params.key)
+  if(request.params.key === Number(1)){
     client.randomkey((err, value) => {
       key = value
     })
