@@ -21,7 +21,8 @@ router.post('/:key', async(request, response) => {
 
   var key = request.params.key
   if(request.params.key === '1'){
-    await distributeKey('xbcw')
+    await distributeKey('wxbc')
+    await response.status(200)
   }else{
     await distributeKey(key)
   }

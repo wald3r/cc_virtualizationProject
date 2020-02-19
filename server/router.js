@@ -32,7 +32,7 @@ const factorial = (n) => {
 
 router.post('/:id', async(request, response) => {
   const key = request.params.id
-  await getValue(key)
+  await Promise.all(await getValue(key))
 })
 
 
