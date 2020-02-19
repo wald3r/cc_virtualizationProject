@@ -37,6 +37,7 @@ const distributeKey = async (key) => {
     const rrValue = getRoundRobin()
     console.log(serverPorts[rrValue])
     console.log(serverNames[rrValue])
+    console.log(key)
     const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
     if(status === 200){
       console.log('Forwarded request', key, 'to', serverNames[rrValue])
