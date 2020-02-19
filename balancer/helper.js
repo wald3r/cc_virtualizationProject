@@ -14,11 +14,11 @@ const createServernames = (scale) => {
 
   var list = []
   var startNumber = 1
-  var startName = `project_server_${startNumber}`
+  var startName = `server_${startNumber}`
   for(let a = 0; a < scale; a++){
     list = list.concat(startName)
     startNumber++
-    startName = `project_server_${startNumber}`
+    startName = `server_${startNumber}`
   }
 
   return list
