@@ -1,5 +1,5 @@
 
-let PORT = process.env.PORT
+let PORT = 3000
 
 
 module.exports = {PORT}

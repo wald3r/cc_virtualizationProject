@@ -17,10 +17,12 @@ services:
              cpus: '.05'
 
       redis:
-       build: ./redis
-       networks:
-         - webnet
-       container_name: redis
+        build: ./redis
+        networks:
+          - webnet
+        ports:
+          - 3679:3679
+        container_name: redis
 
 networks:
   webnet:
