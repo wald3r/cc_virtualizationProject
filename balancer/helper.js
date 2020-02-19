@@ -3,7 +3,7 @@ const createServerports = (scale) => {
   var list = []
   var startNumber = 3001
   for(let a = 0; a < scale; a++){
-    list.concat(startNumber)
+    list = list.concat(startNumber)
     startNumber++
   }
 
@@ -16,7 +16,7 @@ const createServernames = (scale) => {
   var startNumber = 1
   var startName = `project_server_${startNumber}`
   for(let a = 0; a < scale; a++){
-    list.concat(startName)
+    list = list.concat(startName)
     startNumber++
     startName = `project_server_${startNumber}`
   }
