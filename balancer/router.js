@@ -18,14 +18,17 @@ router.get('/', async(request, response) => {
 
 const getValue = async () => {
 
-  try{
-    const rrValue = getRoundRobin()
-    console.log(serverPorts[rrValue])
-    const response = await sendMessage(serverPorts[rrValue], '127.0.0.1')
-    return response
-
-  }catch(exception){
-    console.log('Error')
+  for(;;){
+    try{
+      const rrValue = getRoundRobin()
+      console.log(`Redirecting message to ${serverPorts[rrValue]}`)
+      const response = await sendMessage(serverPorts[rrValue], '127.0.0.1')
+      if(response.data !== undefined){
+        return response
+      }
+    }catch(exception){
+      console.log(`Server not reachable. Try next server.`)
+    }
   }
 }
 
