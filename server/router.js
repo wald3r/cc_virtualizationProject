@@ -11,7 +11,9 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 const getValue = async (key) => {
 
   await client.get(key, async (err, value) => {
-     return factorial(value)
+     const fac = factorial(value)
+     console.log(fac)
+     return fac
   })
 
 }
