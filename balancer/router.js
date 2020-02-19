@@ -38,7 +38,7 @@ const distributeKey = async (key) => {
     console.log(serverPorts[rrValue])
     console.log(serverNames[rrValue])
     console.log(key)
-    const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
+    const status = await sendKey(serverPorts[rrValue], '127.0.0.1', key)
     if(status === 200){
       console.log('Forwarded request', key, 'to', serverNames[rrValue])
       break
