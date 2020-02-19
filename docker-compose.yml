@@ -10,26 +10,11 @@ services:
        environment:
          - PORT=2999
        ports:
-         - 3001-3100:2999
+         - 3001-3005:2999
        deploy:
          resources:
            limits:
              cpus: '.05'
-
-      balancer:
-       depends_on: 
-         - redis
-         - server
-       build: ./balancer
-       environment:
-         - PORT=3000
-       ports:
-         - 3000:3000
-       networks:
-         - webnet
-
-       container_name: balancer
-      
 
       redis:
        build: ./redis
