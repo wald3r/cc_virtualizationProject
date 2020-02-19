@@ -18,15 +18,15 @@ client.on('error', (err) => console.log('Something went wrong ' + err))
 
 
 
-router.post('/:id', async(request, response) => {
+router.post('/:key', async(request, response) => {
 
-  var key = request.params.id
+  var key = request.params.key
   if(key === 1){
     client.randomkey((err, value) => {
       key = value
     })
   }
-
+  console.log(key)
   for(;;){
     const rrValue = getRoundRobin()
     const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
