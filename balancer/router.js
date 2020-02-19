@@ -6,7 +6,8 @@ const helper = require('./helper')
 const scale = 5
 var serverPorts = helper.createServerports
 var serverNames = helper.createServernames
-
+console.log(serverPorts)
+console.log(serverNames)
 var roundRobin = 0
 
 
