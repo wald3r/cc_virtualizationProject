@@ -6,8 +6,6 @@ const helper = require('./helper')
 const scale = 5
 var serverPorts = helper.createServerports(scale)
 var serverNames = helper.createServernames(scale)
-console.log(serverPorts)
-console.log(serverNames)
 var roundRobin = 0
 
 
@@ -23,7 +21,7 @@ router.post('/:key', async(request, response) => {
 
   var key = request.params.key
   console.log(request.params.key)
-  if(request.params.key === Number(1)){
+  if(request.params.key === '1'){
     console.log('test')
     await client.randomkey(async (err, value) => {
       console.log('tests',key)
@@ -35,11 +33,11 @@ router.post('/:key', async(request, response) => {
     const rrValue = getRoundRobin()
     console.log(serverPorts[rrValue])
     console.log(serverNames[rrValue])
-   /* const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
+    const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
     if(status === 200){
       console.log('Forwarded request', key, 'to', serverNames[rrValue])
       break
-    }*/
+    }
     break
   }
 })
