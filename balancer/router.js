@@ -21,7 +21,7 @@ router.post('/:key', async(request, response) => {
 
   var key = request.params.key
   if(request.params.key === '1'){
-      await distributeKey('xcwb')
+    await distributeKey('xcwb')
   }else{
     await distributeKey(key)
   }
@@ -34,7 +34,6 @@ const distributeKey = async (key) => {
   for(;;){
     const rrValue = getRoundRobin()
     console.log(serverPorts[rrValue])
-    console.log(serverNames[rrValue])
     console.log(key)
     const status = await sendKey(serverPorts[rrValue], '127.0.0.1', key)
     if(status === 200){

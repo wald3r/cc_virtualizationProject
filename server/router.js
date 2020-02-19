@@ -8,10 +8,10 @@ client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
 
-const getValue = (key) => {
+const getValue = async (key) => {
 
-  client.get(key, async (err, value) => {
-    return value
+  await client.get(key, async (err, value) => {
+     return factorial(value)
   })
 
 }
@@ -32,9 +32,8 @@ const factorial = (n) => {
 router.post('/:id', async(request, response) => {
 
  const key = request.params.id
- const value = getValue(key)
- const result = factorial(value)
- console.log('Factorial value:', result, '/ Original value:', value)
+ const result = getValue(key)
+ console.log('Factorial value:', result, '/ Original key:', key)
  await response.status(200)
 	
 })
