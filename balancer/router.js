@@ -23,19 +23,23 @@ router.post('/:key', async(request, response) => {
   var key = request.params.key
   console.log(request.params.key)
   if(request.params.key === Number(1)){
+    console.log('test')
     await client.randomkey(async (err, value) => {
-      console.log(key)
+      console.log('tests',key)
       key = value
     })
   }
   console.log(key)
   for(;;){
     const rrValue = getRoundRobin()
-    const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
+    console.log(serverPorts[rrValue])
+    console.log(serverNames[rrValue])
+   /* const status = await sendKey(serverPorts[rrValue], serverNames[rrValue], key)
     if(status === 200){
       console.log('Forwarded request', key, 'to', serverNames[rrValue])
       break
-    }
+    }*/
+    break
   }
 })
  
