@@ -21,9 +21,7 @@ router.post('/:key', async(request, response) => {
 
   var key = request.params.key
   if(request.params.key === '1'){
-    await client.randomkey(async (err, value) => {
-      await distributeKey(value)
-    })
+      await distributeKey('xcwb')
   }else{
     await distributeKey(key)
   }
@@ -42,6 +40,8 @@ const distributeKey = async (key) => {
     if(status === 200){
       console.log('Forwarded request', key, 'to', serverNames[rrValue])
       break
+    }else{
+      console.log(status)
     }
     break
   }
