@@ -50,6 +50,8 @@ services:
          - server2
          - server3
        build: ./balancer
+       environment:
+         - PORT=3000
        networks:
          - webnet       
        container_name: balancer
