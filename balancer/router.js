@@ -5,39 +5,24 @@ const helper = require('./helper')
 
 const scale = 5
 var serverPorts = helper.createServerports(scale)
-var serverNames = helper.createServernames(scale)
 var roundRobin = 0
 
 
-const redis = require('redis');
-const client = redis.createClient({port: 6379, host: '127.0.0.1'});
-client.on('connect', () => console.log('connected'))
-client.on('error', (err) => console.log('Something went wrong ' + err))
 
+router.get('/', async(request, response) => {
 
-
-
-router.post('/:key', async(request, response) => {
-
-  var key = request.params.key
-  if(request.params.key === '1'){
-    await distributeKey('wxbc')
-    await response.status(200)
-  }else{
-    await distributeKey(key)
-  }
-
-  
+    const response = await getValue()
 })
 
 
-const distributeKey = async (key) => {
+const getValue = async () => {
 
   try{
     const rrValue = getRoundRobin()
     console.log(serverPorts[rrValue])
-    console.log(key)
-    await sendKey(serverPorts[rrValue], '127.0.0.1', key)
+    const response = await sendMessage(serverPorts[rrValue], '127.0.0.1')
+    return response
+
   }catch(exception){
     console.log('Error')
   }
@@ -45,11 +30,10 @@ const distributeKey = async (key) => {
 
  
 
-const sendKey = async (port, names, key) => {
-  await axios.post(`http://${names}:${port}/fact/${key}`)
+const sendMessage = async (port, names, key) => {
+  const response = await axios.get(`http://${names}:${port}/fact/${key}`)
+  return response
 }
-
-
 
 
 const getRoundRobin = () => {

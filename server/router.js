@@ -8,16 +8,6 @@ client.on('connect', () => console.log('connected'))
 client.on('error', (err) => console.log('Something went wrong ' + err))
 
 
-const getValue = async (key) => {
-
-  await client.get(key, async (err, value) => {
-     const fac = factorial(value)
-     console.log('Factorial value:', fac, '/ Original key:', key)
-  })
-
-}
-
-
 const factorial = (n) => {
   
   if (n < 0) { throw "Number must be non-negative" }
@@ -30,9 +20,15 @@ const factorial = (n) => {
   return result
 }
 
-router.post('/:id', async(request, response) => {
-  const key = request.params.id
-  await Promise.all(await getValue(key))
+router.get('/', async(request, response) => {
+ 
+  client.randomkey((err, key) => {
+    client.get(key, (err, value) => {
+      const fac = factorial(value)
+      return response.status(200).send(`The factorial of ${value} is ${fac}`)
+    })
+  })
+
 })
 
 
