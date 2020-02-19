@@ -35,6 +35,7 @@ router.post('/:id', async(request, response) => {
  const value = getValue(key)
  const result = factorial(value)
  console.log('Factorial value:', result, '/ Original value:', value)
+ await response.status(200)
 	
 })
 

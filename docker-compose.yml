@@ -1,59 +1,31 @@
 version: "3.3"
 
 services:
-      server1:
-       depends_on: 
-         - redis
-       build: ./server 
-       networks:
-         - webnet
-       environment:
-         - PORT=3001
-       deploy:
-         resources:
-           limits:
-             cpus: '.05'
-       container_name: factServer1
-
-      server2:
+      server:
        depends_on: 
          - redis
        build: ./server
        networks:
          - webnet
        environment:
-         - PORT=3002
+         - PORT=2999
+       ports:
+         - "3001-3100:2999"
        deploy:
          resources:
            limits:
              cpus: '.05'
-       container_name: factServer2
 
-      server3:
+      balancer:
        depends_on: 
          - redis
-       build: ./server
-       networks:
-         - webnet
-       environment:
-         - PORT=3003
-       deploy:
-         resources:
-           limits:
-             cpus: '.05'
-       container_name: factServer3
-
-      loadbalancer:
-       depends_on: 
-         - redis
-         - server1
-         - server2
-         - server3
+         - server
        build: ./balancer
        environment:
          - PORT=3000
        networks:
-         - webnet       
+         - webnet
+
        container_name: balancer
       
 
