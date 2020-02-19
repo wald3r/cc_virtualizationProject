@@ -23,7 +23,7 @@ router.post('/:key', async(request, response) => {
   var key = request.params.key
   console.log(request.params.key)
   if(request.params.key === Number(1)){
-    client.randomkey((err, value) => {
+    await client.randomkey(async (err, value) => {
       key = value
     })
   }
