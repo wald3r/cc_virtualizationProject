@@ -3,8 +3,6 @@
 
 #preparation
 sudo chmod +xr *.sh
-./install-docker-compose.sh
-sudo docker-compose --compatibility down
 sudo docker container rm bb redis server1 server2 server3 server4 server5 --force
 
 #Task a
