@@ -1,4 +1,6 @@
-
+/**
+ * Router class
+ */
 const router = require('express').Router()
 const axios = require('axios')
 const helper = require('./helper')
@@ -8,14 +10,18 @@ var serverPorts = helper.createServerports(scale)
 var roundRobin = 0
 
 
-
+/**
+ * Waits for incoming http get requests
+ */
 router.get('/', async(request, response) => {
 
     const answer = await getValue()
     response.status(200).send(answer.data)
 })
 
-
+/**
+ * Picks a http server to get factorial value
+ */
 const getValue = async () => {
 
   for(;;){
@@ -33,13 +39,19 @@ const getValue = async () => {
 }
 
  
-
+/**
+ * Sends a message to a http server
+ * @param {*} port 
+ * @param {*} names 
+ */
 const sendMessage = async (port, names) => {
   const response = await axios.get(`http://${names}:${port}/fact/`)
   return response
 }
 
-
+/**
+ * Computate which http server shall receive the next message
+ */
 const getRoundRobin = () => {
 
   if(roundRobin < scale){

@@ -2,6 +2,9 @@
 
 
 #preparation
+sudo chmod +xr *.sh
+./install-docker-compose.sh
+sudo docker-compose --compatibility down
 sudo docker container rm bb redis server1 server2 server3 server4 server5 --force
 
 #Task a
@@ -14,9 +17,7 @@ cd ..
 sudo docker network create mynetwork
 
 #Task b
-sudo chmod +xr *.sh
 ./copy-db.sh
-./install-docker-compose.sh
 cd redis
 sudo docker build -t redis .
 sudo docker container run -d --network mynetwork --name redis redis 

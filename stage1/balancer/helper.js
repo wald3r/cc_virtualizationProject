@@ -1,3 +1,7 @@
+/**
+ * Creates ports
+ * @param {*} scale how many server? 
+ */
 const createServerports = (scale) => {
 
   var list = []
