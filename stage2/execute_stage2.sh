@@ -16,4 +16,4 @@ sudo chmod +xr install-docker-compose.sh
 sudo chmod +xr install-npm.sh
 ./install-npm.sh
 sudo chmod +xr run.sh
-./run 3
+./run.sh 3

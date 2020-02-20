@@ -11,7 +11,11 @@ services:
          - PORT=2999
        ports:
          - 3001-3005:2999
-
+       deploy:
+        resources:
+          limits:
+            cpus: '.05'
+ 
       redis:
         build: ./redis
         networks:

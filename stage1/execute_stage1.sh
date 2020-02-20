@@ -14,7 +14,7 @@ sudo chmod +xr *.sh
 ./install-docker-compose.sh
 sudo docker-compose --compatibility down
 sudo docker-compose --compatibility build
-sudo docker-compose --compatibility up
+sudo docker-compose --compatibility up -d
 
 
 
