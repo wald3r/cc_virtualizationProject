@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+#preparation
+sudo chmod +xr copy-db.sh
+./copy-db.sh
+
 #Task a
 sudo chmod +xr install-docker-compose.sh
 ./install-docker-compose.sh

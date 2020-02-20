@@ -1,0 +1,1 @@
+sudo docker container rm bb server redis --force
