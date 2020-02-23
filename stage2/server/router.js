@@ -29,7 +29,6 @@ const factorial = (n) => {
  * Http get method to pull a random value from redis and calculate the factorial value of it
  */
 router.get('/', async(request, response) => {
-  console.log('hey')
   client.randomkey((err, key) => {
     client.get(key, (err, value) => {
       const fac = factorial(value)
